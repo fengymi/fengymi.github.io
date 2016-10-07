@@ -1,8 +1,10 @@
 ---
-title: git_study
+title: git使用文档
 date: 2016-10-07 10:09:45
-tags: git 版本控制
+tags: [git,版本控制]
 ---
+
+[官方文档](https://git-scm.com/doc)
 
 + <h3>初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库</h3>
 ``` bash
