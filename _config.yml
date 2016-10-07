@@ -17,8 +17,6 @@ i18n:
 
 # disqus_shortname: fengymi #评论
 #disqus_shortname: fengymi
-duoshuo_shortname: fengymi.duoshuo.com
-#duoshuo: f9653f3b382932b1d1e100ca0fef78fc
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
