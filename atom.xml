@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>fengymi&#39; bolg</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.fengymi.me/"/>
+  <updated>2016-10-06T06:26:34.735Z</updated>
+  <id>http://www.fengymi.me/</id>
+  
+  <author>
+    <name>fengymi</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>start</title>
+    <link href="http://www.fengymi.me/2016/10/06/start/"/>
+    <id>http://www.fengymi.me/2016/10/06/start/</id>
+    <published>2016-10-06T06:25:59.000Z</published>
+    <updated>2016-10-06T06:26:34.735Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="大家好，bolg测试"><a href="#大家好，bolg测试" class="headerlink" title="大家好，bolg测试"></a>大家好，bolg测试</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;大家好，bolg测试&quot;&gt;&lt;a href=&quot;#大家好，bolg测试&quot; class=&quot;headerlink&quot; title=&quot;大家好，bolg测试&quot;&gt;&lt;/a&gt;大家好，bolg测试&lt;/h2&gt;
+    
+    </summary>
+    
+    
+      <category term="测试" scheme="http://www.fengymi.me/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://www.fengymi.me/2016/10/06/test/"/>
+    <id>http://www.fengymi.me/2016/10/06/test/</id>
+    <published>2016-10-06T06:22:52.000Z</published>
+    <updated>2016-10-06T06:26:38.231Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="这是一个测试文件"><a href="#这是一个测试文件" class="headerlink" title="这是一个测试文件"></a>这是一个测试文件</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;这是一个测试文件&quot;&gt;&lt;a href=&quot;#这是一个测试文件&quot; class=&quot;headerlink&quot; title=&quot;这是一个测试文件&quot;&gt;&lt;/a&gt;这是一个测试文件&lt;/h2&gt;
+    
+    </summary>
+    
+    
+      <category term="测试" scheme="http://www.fengymi.me/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+</feed>
