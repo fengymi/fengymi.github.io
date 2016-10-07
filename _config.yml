@@ -1,0 +1,77 @@
+# Hexo 配置信息
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: fengymi
+subtitle: #副标题
+description: bolg 测试
+author: fengymi
+language: zh-CN #配置语言 对应themes下languages的文件名 (zh.yml)
+timezone: Asia/Shanghai #时区
+
+
+i18n:
+  type: [page, post]
+  generator: [index, archive, category, tag]
+
+# disqus_shortname: fengymi #评论
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://www.fengymi.me
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# 目录
+source_dir: source #源文件目录
+public_dir: public #生成的网页文件目录
+tag_dir: tags #标签
+archive_dir: archives #归档
+category_dir: categories #分类
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render: README.md
+
+# Writing
+new_post_name: :title.md # 新文章标题
+default_layout: post #默认模板
+titlecase: false #标题转换成大写
+external_link: true #新标签页里打开连接
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight: #语法高亮
+  enable: true
+  line_number: true #显示行号
+  auto_detect: false
+  tab_replace:
+
+#分类和标签
+default_category: uncategorized #默认分类
+category_map:
+tag_map:
+
+#日期时间格式
+## http://momentjs.com/docs/#/displaying/format/ (格式查看)
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# 分页
+per_page: 10 #每页文章数, 设置成 0 禁用分页
+pagination_dir: page
+
+# 插件和主题
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: yilia
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/fengymi/fengymi.github.io.git
+  branch: master
