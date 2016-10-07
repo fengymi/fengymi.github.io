@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>fengymi&#39; bolg</title>
+  <title>fengymi</title>
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.fengymi.me/"/>
-  <updated>2016-10-06T06:26:34.735Z</updated>
+  <updated>2016-10-07T00:57:24.243Z</updated>
   <id>http://www.fengymi.me/</id>
   
   <author>
@@ -14,6 +14,22 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>markdown-hello-world</title>
+    <link href="http://www.fengymi.me/2016/10/06/markdown-hello-world/"/>
+    <id>http://www.fengymi.me/2016/10/06/markdown-hello-world/</id>
+    <published>2016-10-06T09:48:30.000Z</published>
+    <updated>2016-10-07T00:57:24.243Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="study,markdown" scheme="http://www.fengymi.me/tags/study-markdown/"/>
+    
+  </entry>
   
   <entry>
     <title>start</title>
