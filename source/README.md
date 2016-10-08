@@ -1,1 +1,1 @@
-[<h1>blog 展示</h1>](www.fengymi.me)
+[<h1>blog 展示</h1>](http://www.fengymi.me)
