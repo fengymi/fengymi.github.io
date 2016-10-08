@@ -25,6 +25,8 @@ tags: [git,版本控制]
 ```
 <br />
 
+<!--more-->
+
 + <h3>忽视文件 直接添加.gitignore [详细忽视文件](https://github.com/github/gitignore)</h3>
 
 + <h3>常用管理命令</h3>
