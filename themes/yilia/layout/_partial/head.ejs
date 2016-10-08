@@ -18,11 +18,12 @@
   } else if (is_tag()){
     title = 'Tag: ' + page.tag;
   }
+
   %>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <style type="text/css">
     .ds-sync{display:none !important;}
-
+    #ds-thread #ds-reset .ds-powered-by{display:none;}
   </style>
   <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

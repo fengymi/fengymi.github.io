@@ -1,5 +1,5 @@
 ---
-title: git使用文档
+title: git使用教程
 date: 2016-10-07 10:09:45
 tags: [git,版本控制]
 ---
@@ -11,8 +11,8 @@ tags: [git,版本控制]
     #初始化
     git init #初始化本地目录
     #克隆远程代码
-    git clone xxxx.git (克隆并使用远程项目名称)
-    git clone xxxx.git study (克隆并新建本地名称)
+    git clone xxxx.git # 克隆并使用远程项目名称
+    git clone xxxx.git study # 克隆并新建本地名称
 
     #修改
     touch test # 新建文件
@@ -23,27 +23,48 @@ tags: [git,版本控制]
     git remote add origin xxxx.git # 添加远程仓库地址 (如果是克隆远程的就不需要添加)
     git push origin master # 提交到master分支
 ```
+<br />
+
 + <h3>忽视文件 直接添加.gitignore [详细忽视文件](https://github.com/github/gitignore)</h3>
 
 + <h3>常用管理命令</h3>
 ``` bash
 #分支
+    #查看
     git branch # 查看本地分支
     git branch --remote/-r # 查看远程分支
     git branch -a # 查看所有分支
+    git branch --merged # 查看已经合并的分支
+    git branch --no-merged # 查看未合并的分支
+    git log # 查看历史提交信息
+    git -v # 查看本地最后一次提交信息
+#
     git checkout -b new_branch # 创建分支(代码来自当前分支,创建时同时会进行切换)
+    # 等效这两条命令
+    git branch new_branch
+    git checkout new_branch
+#
     git checkout another_branch # 切换其它分支
     git push origin branch_name # 将某个分支提交到远程 (如果远端服务器没有该分支，将会自动创建)
-    git pull origin branch_name # 从远程获取 branch_name 分支的代码
+#
+    git pull origin branch_name # 从远程获取 branch_name 分支的代码，并合并
+    #等效
+    git fetch origin branch_name
+    git merge branch_name
+#
+    git merge another_branch # 合并其它分支
+#
     git branch -d branch_name # 删除本地分支
+    git branch -D branch_name # 强制删除(当被删除的分支还未被合并，就是已经修改但未被合并)
     git push origin :branch_name # 删除远程分支 加:
+
 #状态
     git status # (加 -s/--short ,输出简短信息)
 #文件删除
     rm filename # 先从硬盘上删除文件
-    git rm filename # 再从git缓冲区删除
-
+    git rm filename # 再从git缓冲区删除 -f 强制删除
 ```
+<br />
 
 + <h3>git 全局配置 </h3>
 ``` bash
@@ -52,6 +73,7 @@ tags: [git,版本控制]
     git config --global user.name "test" # 设置每次提交是的用户 对ssh方式有效
     git config --global user.email "test@test.com"
 ```
+<br />
 
 + <h3>git 一般命令</h3>
 ``` bash
@@ -61,6 +83,7 @@ tags: [git,版本控制]
     # 3. man git-<verb>
     git help config
 ```
+<br />
 
 + <h3>git 理解</h3>
 origin： 可以认为就是一个远程分支的别名 .git/config 文件中可以查看
