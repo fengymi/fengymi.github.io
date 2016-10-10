@@ -88,5 +88,5 @@ tags: [git,版本控制]
 <br />
 
 + <h3>git 理解</h3>
-origin： 可以认为就是一个远程分支的别名 .git/config 文件中可以查看
+origin： 是一个远程分支的别名 .git/config 文件中可以查看
 
