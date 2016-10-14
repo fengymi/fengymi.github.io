@@ -43,4 +43,4 @@ shc 使用
 ```
 
 shc解密
-[参考](http://www.bluegame.cn/tools/shc-encode-and-decode.html)
+[参考](http://blog.xuthus.cc/post/17.html)

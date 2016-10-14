@@ -5,7 +5,7 @@
 # Site
 title: 寞離陌棄
 subtitle: #副标题
-description: 寞離陌棄 blog
+description: 寞離陌棄 fengymi blog
 author: 寞離陌棄
 language: zh-CN #配置语言 对应themes下languages的文件名 (zh.yml)
 timezone: Asia/Shanghai #时区
@@ -20,7 +20,7 @@ i18n:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.fengymi.me
+url: http://www.fengymi.cn
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
