@@ -14,6 +14,6 @@ tags: [hexo]
     npm install hexo-server # 安装hexo server(发布本地)的功能
     npm install hexo-deployer-git –save # 安装hexo d (使用git提交的功能,需要支持ssh连接github) 
 ```
-<br />
+<br /> 
 
 <!--more-->
