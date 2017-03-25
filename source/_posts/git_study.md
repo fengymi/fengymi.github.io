@@ -38,6 +38,7 @@ tags: [git,版本控制]
     git branch -a # 查看所有分支
     git branch --merged # 查看已经合并的分支
     git branch --no-merged # 查看未合并的分支
+    git branch -vv # 查看本地分支和远程分支的对应情况
     git log # 查看历史提交信息
     git -v # 查看本地最后一次提交信息
 #
@@ -46,7 +47,9 @@ tags: [git,版本控制]
     git branch new_branch
     git checkout new_branch
 #
+    git branch -u origin/branch [now_branch] #将本地当前[其他]分支映射到远程某个分支
     git checkout another_branch # 切换其它分支
+    git checkout -b new_branch origin/new_branch # 新建一个本地分支和远程分支进行对应
     git push origin branch_name # 将某个分支提交到远程 (如果远端服务器没有该分支，将会自动创建)
 #
     git pull origin branch_name # 从远程获取 branch_name 分支的代码，并合并
