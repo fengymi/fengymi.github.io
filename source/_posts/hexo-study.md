@@ -7,11 +7,17 @@ tags: [hexo]
 [官方文档](https://hexo.io/zh-cn/docs/)
 
 基础工作需要安装node.js 和 git
-1.安装一些其他的hexo功能
+```
+    #配置npm全局安装目录及缓存目录
+    npm config set prefix "%NODE_HOME%/node_global"
+    npm config set cache "%NODE_HOME%/node_cache"
+```
+
+1.安装一些其他的hexo功能(项目根目录执行)(使用npm install命令)
 ```
     npm install
-    npm install -g hexo-cli	#安装hexo
-    npm install hexo --save
+    npm install -g hexo-cli	#安装hexo(全局安装)
+    npm install hexo --save # 保存到package.json文件(项目根目录)
     npm install hexo-server # 安装hexo server(发布本地)的功能
     npm install hexo-deployer-git --save # 安装hexo d (使用git提交的功能,需要支持ssh连接github) 
 ```
