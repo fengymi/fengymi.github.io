@@ -74,5 +74,26 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:fengymi/fengymi.github.io.git
-  branch: master
+  repo:
+      coding: git@git.coding.net:fengymi/fengymi.git,master
+      github: git@github.com:fengymi/fengymi.github.io.git,master
+
+
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true

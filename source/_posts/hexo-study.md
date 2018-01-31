@@ -13,7 +13,7 @@ tags: [hexo]
     npm config set cache "%NODE_HOME%/node_cache"
 ```
 
-1.安装一些其他的hexo功能(项目根目录执行)(使用npm install命令)
+1.安装一些其他的hexo功能(项目根目录执行)(使用npm install命令, 安装当前package.json下的依赖)
 ```
     npm install
     npm install -g hexo-cli	#安装hexo(全局安装)
