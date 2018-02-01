@@ -1,12 +1,14 @@
 ---
 title: git使用教程
 date: 2016-10-07 10:09:45
+toc: true
 tags: [git,版本控制]
 ---
 
 [官方文档](https://git-scm.com/doc)
 
-+ <h3>初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库</h3>
+### 1. 快速使用
+初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库
 ``` bash
     #初始化
     git init #初始化本地目录
@@ -27,10 +29,9 @@ tags: [git,版本控制]
 
 <!--more-->
 
-+ <h3>忽视文件 直接添加.gitignore [详细忽视文件](https://github.com/github/gitignore)</h3>
-
-+ <h3>常用管理命令</h3>
-``` bash
+### 2. 常用管理命令
+#### 2.1. 查看
+```bash
 #分支
     #查看
     git branch # 查看本地分支
@@ -42,6 +43,9 @@ tags: [git,版本控制]
     git log # 查看历史提交信息
     git -v # 查看本地最后一次提交信息
 #
+```
+#### 2.2. 操作
+```bash
     git checkout -b new_branch # 创建分支(代码来自当前分支,创建时同时会进行切换)
     # 等效这两条命令
     git branch new_branch
@@ -69,19 +73,8 @@ tags: [git,版本控制]
     rm filename # 先从硬盘上删除文件
     git rm filename # 再从git缓冲区删除 -f 强制删除
 ```
-<br />
-
-+ <h3>git 全局配置 </h3>
-``` bash
-    # git config --global X.x "内容" , ～/.gitconfig 可以查看配置信息
-    git config --global push.default "current" # 设置push时的默认分支为当前分支 (提交当前分支可以直接git push)
-    git config --global user.name "test" # 设置每次提交是的用户 对ssh方式有效
-    git config --global user.email "test@test.com"
-```
-<br />
-
-+ <h3>git 一般命令</h3>
-``` bash
+#### 2.3. 基本命令
+```bash
     # help 有三种获取命令帮助的方式
     # 1. git help <verb>
     # 2. git <verb> --help
@@ -90,6 +83,18 @@ tags: [git,版本控制]
 ```
 <br />
 
-+ <h3>git 理解</h3>
-origin： 是一个远程分支的别名 .git/config 文件中可以查看
+### 3. 全局配置
+```bash
+    # git config --global X.x "内容" , ～/.gitconfig 可以查看配置信息
+    git config --global push.default "current" # 设置push时的默认分支为当前分支 (提交当前分支可以直接git push)
+    git config --global user.name "test" # 设置每次提交是的用户 对ssh方式有效
+    git config --global user.email "test@test.com"
+```
+<br />
+
+### 4. 描述
+
+1. 忽视文件 直接添加.gitignore [详细忽视文件](https://github.com/github/gitignore)
+<br />
+2. origin： 是一个远程分支的别名 .git/config 文件中可以查看
 

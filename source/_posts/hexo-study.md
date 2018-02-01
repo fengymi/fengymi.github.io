@@ -1,6 +1,7 @@
 ---
 title: hexo-study
 date: 2016-10-01 11:37:18
+toc: true
 tags: [hexo]
 ---
 
@@ -13,7 +14,8 @@ tags: [hexo]
     npm config set cache "%NODE_HOME%/node_cache"
 ```
 
-1.安装一些其他的hexo功能(项目根目录执行)(使用npm install命令, 安装当前package.json下的依赖)
+### 1. hexo安装
+安装一些其他的hexo功能(项目根目录执行)(使用npm install命令, 安装当前package.json下的依赖)
 ```
     npm install
     npm install -g hexo-cli	#安装hexo(全局安装)
@@ -24,15 +26,14 @@ tags: [hexo]
 <br /> 
 
 <!--more-->
-2.常用命令 \[ \](可选) <>(必选)
-```
+### 2. 常用命令
+```bash
+    # [](可选) <>(必选)
     hexo init [dir] # 将当前[某个]文件夹初始化为hexo目录
     #新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。
     hexo new [layout] <title>  
     hexo g # 生成文章
-    hexo d # 发布文章到远程仓库
+    hexo s # 本地启动
+    hexo d # 发布文章到远程仓库(需要配置相应的代码存储仓库)
 
 ```
-
-3.源码分支
-    clone 源码分支，用hexo d 发布源码
