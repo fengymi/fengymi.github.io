@@ -10,7 +10,6 @@ author: fengymi
 language: zh-CN #配置语言 对应themes下languages的文件名 (zh.yml)
 timezone: Asia/Shanghai #时区
 
-
 i18n:
   type: [page, post]
   generator: [index, archive, category, tag]
