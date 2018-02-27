@@ -8,7 +8,7 @@ tags: [hexo]
 [官方文档](https://hexo.io/zh-cn/docs/)
 
 基础工作需要安装node.js 和 git
-```
+```bash
     #配置npm全局安装目录及缓存目录
     npm config set prefix "%NODE_HOME%/node_global"
     npm config set cache "%NODE_HOME%/node_cache"
@@ -16,7 +16,7 @@ tags: [hexo]
 
 ### 1. hexo安装
 安装一些其他的hexo功能(项目根目录执行)(使用npm install命令, 安装当前package.json下的依赖)
-```
+```bash
     npm install
     npm install -g hexo-cli	#安装hexo(全局安装)
     npm install hexo --save # 保存到package.json文件(项目根目录)
