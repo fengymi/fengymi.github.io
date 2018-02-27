@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.fengymi.cn">
-  <title>git使用教程 | fengymi</title>
+  <title>Tag: java | fengymi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="官方文档 1. 快速使用初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库1234567891011121314#初始化git init #初始化本地目录#克隆远程代码git clone xxxx.git # 克隆并使用远程项目名称git clone xxxx.git study # 克隆并新建本地名称#修改touch test # 新建文件git add test # 把某个文">
-<meta name="keywords" content="git,版本控制">
-<meta property="og:type" content="article">
-<meta property="og:title" content="git使用教程">
-<meta property="og:url" content="http://blog.fengymi.cn/2016/10/07/git_study/index.html">
+  <meta name="description" content="fengymi blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="fengymi">
+<meta property="og:url" content="http://blog.fengymi.cn/tags/java/index.html">
 <meta property="og:site_name" content="fengymi">
-<meta property="og:description" content="官方文档 1. 快速使用初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库1234567891011121314#初始化git init #初始化本地目录#克隆远程代码git clone xxxx.git # 克隆并使用远程项目名称git clone xxxx.git study # 克隆并新建本地名称#修改touch test # 新建文件git add test # 把某个文">
+<meta property="og:description" content="fengymi blog">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-01T11:37:10.399Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git使用教程">
-<meta name="twitter:description" content="官方文档 1. 快速使用初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库1234567891011121314#初始化git init #初始化本地目录#克隆远程代码git clone xxxx.git # 克隆并使用远程项目名称git clone xxxx.git study # 克隆并新建本地名称#修改touch test # 新建文件git add test # 把某个文">
+<meta name="twitter:title" content="fengymi">
+<meta name="twitter:description" content="fengymi blog">
   
     <link rel="alternative" href="/atom.xml" title="fengymi" type="application/atom+xml">
   
@@ -139,229 +137,72 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-git_study" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      git使用教程
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/垃圾回收机制/" class="archive-article-date">
+  	<time datetime="2018-02-27T07:19:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/垃圾回收机制/">垃圾回收机制</a>
     </h1>
   
 
-        
-        <a href="/2016/10/07/git_study/" class="archive-article-date">
-  	<time datetime="2016-10-07T02:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://git-scm.com/doc" target="_blank" rel="noopener">官方文档</a></p>
-<h3 id="1-快速使用"><a href="#1-快速使用" class="headerlink" title="1. 快速使用"></a>1. 快速使用</h3><p>初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初始化</span></span><br><span class="line">git init <span class="comment">#初始化本地目录</span></span><br><span class="line"><span class="comment">#克隆远程代码</span></span><br><span class="line">git <span class="built_in">clone</span> xxxx.git <span class="comment"># 克隆并使用远程项目名称</span></span><br><span class="line">git <span class="built_in">clone</span> xxxx.git study <span class="comment"># 克隆并新建本地名称</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改</span></span><br><span class="line">touch <span class="built_in">test</span> <span class="comment"># 新建文件</span></span><br><span class="line">git add <span class="built_in">test</span> <span class="comment"># 把某个文件加入到git管理</span></span><br><span class="line">git commit -m <span class="string">"test"</span> <span class="comment"># 提交到本地</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#推送至远程仓库</span></span><br><span class="line">git remote add origin xxxx.git <span class="comment"># 添加远程仓库地址 (如果是克隆远程的就不需要添加)</span></span><br><span class="line">git push origin master <span class="comment"># 提交到master分支</span></span><br></pre></td></tr></table></figure></p>
-<p><br></p>
-<a id="more"></a>
-<h3 id="2-常用管理命令"><a href="#2-常用管理命令" class="headerlink" title="2. 常用管理命令"></a>2. 常用管理命令</h3><h4 id="2-1-查看"><a href="#2-1-查看" class="headerlink" title="2.1. 查看"></a>2.1. 查看</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分支</span></span><br><span class="line">    <span class="comment">#查看</span></span><br><span class="line">    git branch <span class="comment"># 查看本地分支</span></span><br><span class="line">    git branch --remote/-r <span class="comment"># 查看远程分支</span></span><br><span class="line">    git branch -a <span class="comment"># 查看所有分支</span></span><br><span class="line">    git branch --merged <span class="comment"># 查看已经合并的分支</span></span><br><span class="line">    git branch --no-merged <span class="comment"># 查看未合并的分支</span></span><br><span class="line">    git branch -vv <span class="comment"># 查看本地分支和远程分支的对应情况</span></span><br><span class="line">    git <span class="built_in">log</span> <span class="comment"># 查看历史提交信息</span></span><br><span class="line">    git -v <span class="comment"># 查看本地最后一次提交信息</span></span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2. 操作"></a>2.2. 操作</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    git checkout -b new_branch <span class="comment"># 创建分支(代码来自当前分支,创建时同时会进行切换)</span></span><br><span class="line">    <span class="comment"># 等效这两条命令</span></span><br><span class="line">    git branch new_branch</span><br><span class="line">    git checkout new_branch</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">    git branch -u origin/branch [now_branch] <span class="comment">#将本地当前[其他]分支映射到远程某个分支</span></span><br><span class="line">    git checkout another_branch <span class="comment"># 切换其它分支</span></span><br><span class="line">    git checkout -b new_branch origin/new_branch <span class="comment"># 新建一个本地分支和远程分支进行对应</span></span><br><span class="line">    git push origin branch_name <span class="comment"># 将某个分支提交到远程 (如果远端服务器没有该分支，将会自动创建)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">    git pull origin branch_name <span class="comment"># 从远程获取 branch_name 分支的代码，并合并</span></span><br><span class="line">    <span class="comment">#等效</span></span><br><span class="line">    git fetch origin branch_name</span><br><span class="line">    git merge branch_name</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">    git merge another_branch <span class="comment"># 合并其它分支</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">    git branch -d branch_name <span class="comment"># 删除本地分支</span></span><br><span class="line">    git branch -D branch_name <span class="comment"># 强制删除(当被删除的分支还未被合并，就是已经修改但未被合并)</span></span><br><span class="line">    git push origin :branch_name <span class="comment"># 删除远程分支 加:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#状态</span></span><br><span class="line">    git status <span class="comment"># (加 -s/--short ,输出简短信息)</span></span><br><span class="line"><span class="comment">#文件删除</span></span><br><span class="line">    rm filename <span class="comment"># 先从硬盘上删除文件</span></span><br><span class="line">    git rm filename <span class="comment"># 再从git缓冲区删除 -f 强制删除</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-3-基本命令"><a href="#2-3-基本命令" class="headerlink" title="2.3. 基本命令"></a>2.3. 基本命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># help 有三种获取命令帮助的方式</span></span><br><span class="line"><span class="comment"># 1. git help &lt;verb&gt;</span></span><br><span class="line"><span class="comment"># 2. git &lt;verb&gt; --help</span></span><br><span class="line"><span class="comment"># 3. man git-&lt;verb&gt;</span></span><br><span class="line">git <span class="built_in">help</span> config</span><br></pre></td></tr></table></figure>
-<p><br></p>
-<h3 id="3-全局配置"><a href="#3-全局配置" class="headerlink" title="3. 全局配置"></a>3. 全局配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git config --global X.x "内容" , ～/.gitconfig 可以查看配置信息</span></span><br><span class="line">git config --global push.default <span class="string">"current"</span> <span class="comment"># 设置push时的默认分支为当前分支 (提交当前分支可以直接git push)</span></span><br><span class="line">git config --global user.name <span class="string">"test"</span> <span class="comment"># 设置每次提交是的用户 对ssh方式有效</span></span><br><span class="line">git config --global user.email <span class="string">"test@test.com"</span></span><br></pre></td></tr></table></figure>
-<p><br></p>
-<h3 id="4-描述"><a href="#4-描述" class="headerlink" title="4. 描述"></a>4. 描述</h3><ol>
-<li>忽视文件 直接添加.gitignore <a href="https://github.com/github/gitignore" target="_blank" rel="noopener">详细忽视文件</a><br><br></li>
-<li>origin： 是一个远程分支的别名 .git/config 文件中可以查看</li>
-</ol>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/pay/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">版本控制</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">垃圾回收器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">gc</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-      
-        <span id="busuanzi_container_page_pv">|阅读量(<span id="busuanzi_value_page_pv"></span>)</span>
-      
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.fengymi.cn/2016/10/07/git_study/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2016/10/07/随意/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          随意
-        
-      </div>
-    </a>
   
   
-    <a href="/2016/10/01/hexo-study/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo-study</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-快速使用"><span class="toc-number">1.</span> <span class="toc-text">1. 快速使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-常用管理命令"><span class="toc-number">2.</span> <span class="toc-text">2. 常用管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-查看"><span class="toc-number">2.1.</span> <span class="toc-text">2.1. 查看</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-操作"><span class="toc-number">2.2.</span> <span class="toc-text">2.2. 操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-基本命令"><span class="toc-number">2.3.</span> <span class="toc-text">2.3. 基本命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-全局配置"><span class="toc-number">3.</span> <span class="toc-text">3. 全局配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-描述"><span class="toc-number">4.</span> <span class="toc-text">4. 描述</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
+    </div></section>
   
 
-  
-
-  
-
-  
-
-  
-  <div id="gitment-ctn"></div> 
-<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
-<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-  id: "http://blog.fengymi.cn/2016/10/07/git_study/",
-  owner: 'fengymi',
-  repo: 'issues',
-  oauth: {
-    client_id: '6dd577db0aca59ab9124',
-    client_secret: 'a802dbbc85056f99b7586dd51b747d6f38ad2add',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-  
+    
 
 
           </div>
@@ -394,9 +235,9 @@ gitment.render('gitment-ctn')
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -449,7 +290,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">idea</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">artifact</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">maven</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">build</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -458,6 +311,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">版本控制</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -473,27 +334,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">maven</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">build</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">idea</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">artifact</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">垃圾回收器</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gc</a>
               </li>
             
             <div class="clearfix"></div>

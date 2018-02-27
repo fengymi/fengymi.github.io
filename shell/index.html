@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.fengymi.cn">
-  <title>hexo-study | fengymi</title>
+  <title>shell加密解密 | fengymi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="官方文档 基础工作需要安装node.js 和 git123#配置npm全局安装目录及缓存目录npm config set prefix &amp;quot;%NODE_HOME%/node_global&amp;quot;npm config set cache &amp;quot;%NODE_HOME%/node_cache&amp;quot; 1. hexo安装安装一些其他的hexo功能(项目根目录执行)(使用npm ins">
-<meta name="keywords" content="hexo">
+  <meta name="description" content="shell脚本进行加密和解密操作   使用gzexe    使用gzexe进行shell加密或者说压缩1gzexe shell.sh #这时就会产生一个shell.sh（压缩文件）和shell.sh~（源文件）">
+<meta name="keywords" content="shell,加密,解密">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo-study">
-<meta property="og:url" content="http://blog.fengymi.cn/2016/10/01/hexo-study/index.html">
+<meta property="og:title" content="shell加密解密">
+<meta property="og:url" content="http://blog.fengymi.cn/shell/index.html">
 <meta property="og:site_name" content="fengymi">
-<meta property="og:description" content="官方文档 基础工作需要安装node.js 和 git123#配置npm全局安装目录及缓存目录npm config set prefix &amp;quot;%NODE_HOME%/node_global&amp;quot;npm config set cache &amp;quot;%NODE_HOME%/node_cache&amp;quot; 1. hexo安装安装一些其他的hexo功能(项目根目录执行)(使用npm ins">
+<meta property="og:description" content="shell脚本进行加密和解密操作   使用gzexe    使用gzexe进行shell加密或者说压缩1gzexe shell.sh #这时就会产生一个shell.sh（压缩文件）和shell.sh~（源文件）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-01T11:37:10.401Z">
+<meta property="og:updated_time" content="2018-01-31T12:47:54.265Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo-study">
-<meta name="twitter:description" content="官方文档 基础工作需要安装node.js 和 git123#配置npm全局安装目录及缓存目录npm config set prefix &amp;quot;%NODE_HOME%/node_global&amp;quot;npm config set cache &amp;quot;%NODE_HOME%/node_cache&amp;quot; 1. hexo安装安装一些其他的hexo功能(项目根目录执行)(使用npm ins">
+<meta name="twitter:title" content="shell加密解密">
+<meta name="twitter:description" content="shell脚本进行加密和解密操作   使用gzexe    使用gzexe进行shell加密或者说压缩1gzexe shell.sh #这时就会产生一个shell.sh（压缩文件）和shell.sh~（源文件）">
   
     <link rel="alternative" href="/atom.xml" title="fengymi" type="application/atom+xml">
   
@@ -139,32 +139,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hexo-study" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-shell" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      hexo-study
+      shell加密解密
     </h1>
   
 
         
-        <a href="/2016/10/01/hexo-study/" class="archive-article-date">
-  	<time datetime="2016-10-01T03:37:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-01</time>
+        <a href="/shell/" class="archive-article-date">
+  	<time datetime="2016-10-13T08:32:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a></p>
-<p>基础工作需要安装node.js 和 git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#配置npm全局安装目录及缓存目录</span><br><span class="line">npm config set prefix &quot;%NODE_HOME%/node_global&quot;</span><br><span class="line">npm config set cache &quot;%NODE_HOME%/node_cache&quot;</span><br></pre></td></tr></table></figure></p>
-<h3 id="1-hexo安装"><a href="#1-hexo安装" class="headerlink" title="1. hexo安装"></a>1. hexo安装</h3><p>安装一些其他的hexo功能(项目根目录执行)(使用npm install命令, 安装当前package.json下的依赖)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm install -g hexo-cli	#安装hexo(全局安装)</span><br><span class="line">npm install hexo --save # 保存到package.json文件(项目根目录)</span><br><span class="line">npm install hexo-server # 安装hexo server(发布本地)的功能</span><br><span class="line">npm install hexo-deployer-git --save # 安装hexo d (使用git提交的功能,需要支持ssh连接github)</span><br></pre></td></tr></table></figure></p>
-<p><br> </p>
+        <h3>shell脚本进行加密和解密操作</h3>
+
+<ul>
+<li><h4>使用gzexe</h4>
+
+</li>
+</ul>
+<p>使用gzexe进行shell加密或者说压缩<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzexe shell.sh <span class="comment">#这时就会产生一个shell.sh（压缩文件）和shell.sh~（源文件）</span></span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h3 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># [](可选) &lt;&gt;(必选)</span></span><br><span class="line">hexo init [dir] <span class="comment"># 将当前[某个]文件夹初始化为hexo目录</span></span><br><span class="line"><span class="comment">#新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。</span></span><br><span class="line">hexo new [layout] &lt;title&gt;  </span><br><span class="line">hexo g <span class="comment"># 生成文章</span></span><br><span class="line">hexo s <span class="comment"># 本地启动</span></span><br><span class="line">hexo d <span class="comment"># 发布文章到远程仓库(需要配置相应的代码存储仓库)</span></span><br></pre></td></tr></table></figure>
+<p>对刚才新产生的shell.sh文件进行解密<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tail -n +44 shell.sh &gt; new_shell.gz <span class="comment"># 使用tail命令从第44行开始读取shell.sh文件并存入一个new_shell.gz的文件中（后缀必须为.gz,为gunzip解密使用）</span></span><br><span class="line">gunzip new_shell.gz <span class="comment">#对这个.gz文件解密就能得到源码了</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><h4>使用shc</h4>
+
+</li>
+</ul>
+<p>shc 安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.datsi.fi.upm.es/~frosal/sources/shc-3.8.9b.tgz</span><br><span class="line">tar vxf shc-3.8.9b.tgz</span><br><span class="line"><span class="built_in">cd</span> shc-3.8.9b</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>shc 使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#参数说明</span></span><br><span class="line">-e date (指定过期时间)</span><br><span class="line">-m message  （指定过期提示的信息）</span><br><span class="line">-f  script_name （指定要编译的shell路径）</span><br><span class="line">-r  relax security  （在不同操作系统执行）</span><br><span class="line">-v  Verbose compilation （输出编译的详细情况）</span><br><span class="line"><span class="comment">#使用样例</span></span><br><span class="line">shc -r shell.sh <span class="comment"># 生成的shell.sh.x是加密的可执行脚本,shell.sh.x.c是c的源代码</span></span><br><span class="line">shc -e 28/09/2016 -m <span class="string">"过期了"</span> -f shell.sh</span><br></pre></td></tr></table></figure></p>
+<p>shc解密<br><a href="http://blog.xuthus.cc/post/17.html" target="_blank" rel="noopener">参考</a></p>
+
       
 
       
@@ -203,7 +216,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">加密</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">解密</a>
         		</li>
       		
 		</ul>
@@ -261,7 +282,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.fengymi.cn/2016/10/01/hexo-study/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.fengymi.cn/shell/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -275,15 +296,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/10/07/git_study/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/yilia集成不蒜子浏览量统计/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          git使用教程
+          yilia集成不蒜子浏览量统计
         
       </div>
     </a>
   
+  
+    <a href="/maven-build/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">idea构建maven速度很慢</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -300,19 +326,6 @@
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-hexo安装"><span class="toc-number">1.</span> <span class="toc-text">1. hexo安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-常用命令"><span class="toc-number">2.</span> <span class="toc-text">2. 常用命令</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
@@ -333,7 +346,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "http://blog.fengymi.cn/2016/10/01/hexo-study/",
+  id: "http://blog.fengymi.cn/shell/",
   owner: 'fengymi',
   repo: 'issues',
   oauth: {
@@ -431,7 +444,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">idea</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">artifact</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">maven</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">build</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -440,6 +465,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">版本控制</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
             
               <li class="article-tag-list-item">
@@ -455,27 +488,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">maven</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">build</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">idea</a>
-              </li>
-            
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">artifact</a>
-              </li>
-            
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">垃圾回收器</a>
+              </li>
+            
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gc</a>
               </li>
             
             <div class="clearfix"></div>

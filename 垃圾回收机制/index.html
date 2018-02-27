@@ -6,18 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.fengymi.cn">
-  <title>fengymi</title>
+  <title>垃圾回收机制 | fengymi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="fengymi blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fengymi">
-<meta property="og:url" content="http://blog.fengymi.cn/index.html">
+  <meta name="description" content="1.垃圾对象判定算法Java中根据不同的垃圾对象判定算法，判断哪些Java对象是不是垃圾。 1.1引用计数算法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1，当引用失效时，计数器值就减1，任何时刻计数器都为0的对象就是不可能再被使用的。优点：实现简单,效率高缺点：很难解决对象之间的相互循环引用（所以一般jvm实现不用该算法）">
+<meta name="keywords" content="java,jvm,垃圾回收器,gc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="垃圾回收机制">
+<meta property="og:url" content="http://blog.fengymi.cn/垃圾回收机制/index.html">
 <meta property="og:site_name" content="fengymi">
-<meta property="og:description" content="fengymi blog">
+<meta property="og:description" content="1.垃圾对象判定算法Java中根据不同的垃圾对象判定算法，判断哪些Java对象是不是垃圾。 1.1引用计数算法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1，当引用失效时，计数器值就减1，任何时刻计数器都为0的对象就是不可能再被使用的。优点：实现简单,效率高缺点：很难解决对象之间的相互循环引用（所以一般jvm实现不用该算法）">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://blog.fengymi.cn/img/java/jvm/清除标记算法.png">
+<meta property="og:image" content="http://blog.fengymi.cn/img/java/jvm/复制算法.png">
+<meta property="og:image" content="http://blog.fengymi.cn/img/java/jvm/GC分代模型.png">
+<meta property="og:image" content="http://blog.fengymi.cn/img/java/jvm/标记整理算法.png">
+<meta property="og:image" content="http://blog.fengymi.cn/img/java/jvm/CMS回收图.png">
+<meta property="og:image" content="http://blog.fengymi.cn/img/java/jvm/G1回收图.png">
+<meta property="og:image" content="http://blog.fengymi.cn/img/java/jvm/垃圾收集器配置参数.png">
+<meta property="og:updated_time" content="2018-02-27T15:30:11.078Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fengymi">
-<meta name="twitter:description" content="fengymi blog">
+<meta name="twitter:title" content="垃圾回收机制">
+<meta name="twitter:description" content="1.垃圾对象判定算法Java中根据不同的垃圾对象判定算法，判断哪些Java对象是不是垃圾。 1.1引用计数算法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1，当引用失效时，计数器值就减1，任何时刻计数器都为0的对象就是不可能再被使用的。优点：实现简单,效率高缺点：很难解决对象之间的相互循环引用（所以一般jvm实现不用该算法）">
+<meta name="twitter:image" content="http://blog.fengymi.cn/img/java/jvm/清除标记算法.png">
   
     <link rel="alternative" href="/atom.xml" title="fengymi" type="application/atom+xml">
   
@@ -137,16 +147,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-垃圾回收机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-垃圾回收机制" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/垃圾回收机制/">垃圾回收机制</a>
+    <h1 class="article-title" itemprop="name">
+      垃圾回收机制
     </h1>
   
 
@@ -161,11 +169,95 @@
       
         <h3 id="1-垃圾对象判定算法"><a href="#1-垃圾对象判定算法" class="headerlink" title="1.垃圾对象判定算法"></a>1.垃圾对象判定算法</h3><p>Java中根据不同的垃圾对象判定算法，判断哪些Java对象是不是垃圾。</p>
 <h4 id="1-1引用计数算法"><a href="#1-1引用计数算法" class="headerlink" title="1.1引用计数算法"></a>1.1引用计数算法</h4><p>给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1，当引用失效时，计数器值就减1，任何时刻计数器都为0的对象就是不可能再被使用的。<br>优点：<b>实现简单</b>,<b>效率高</b><br>缺点：<b>很难解决对象之间的相互循环引用</b>（所以一般jvm实现不用该算法）</p>
-        
-          <a class="article-more-a" href="/垃圾回收机制/#more">more >></a>
-        
+<a id="more"></a>
+<h4 id="1-2根搜索法-GC-Roots-Tracing"><a href="#1-2根搜索法-GC-Roots-Tracing" class="headerlink" title="1.2根搜索法(GC Roots Tracing)"></a>1.2根搜索法(GC Roots Tracing)</h4><p>Java主要是采用根搜索算法来判定对象是否存活的。这种算法的基本思路是通过一系列名为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链，当一个对象到GC Roots没有任何引用链相连时，就证明此对象是不可用的。在Java语言里，可作为GC Roots的兑现包括下面几种：</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
+<li>方法区中的类静态属性引用的对象。</li>
+<li>方法区中的常量引用的对象。</li>
+<li>本地方法栈中JNI（Native方法）的引用对象。</li>
+</ul>
+<p>实际上，在根搜索算法中，要真正宣告一个对象死亡，至少要经历两次标记过程：如果对象在进行根搜索后发现没有与GC Roots相连接的引用链，那它会被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行finalize()方法。当对象没有覆盖finalize()方法，或finalize()方法已经被虚拟机调用过，虚拟机将这两种情况都视为没有必要执行。如果该对象被判定为有必要执行finalize()方法，那么这个对象将会被放置在一个名为F-Queue队列中，并在稍后由一条由虚拟机自动建立的、低优先级的Finalizer线程去执行finalize()方法。finalize()方法是对象逃脱死亡命运的最后一次机会（因为一个对象的finalize()方法<b>最多只会被系统自动调用一次</b>），稍后GC将对F-Queue中的对象进行第二次小规模的标记，如果要在finalize()方法中成功拯救自己，只要在finalize（）方法中让该对象重引用链上的任何一个对象建立关联即可。而如果对象这时还没有关联到任何链上的引用，那它就会被回收掉。</p>
+<h3 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2.垃圾收集算法"></a>2.垃圾收集算法</h3><p>根据垃圾对象判断算法之后，得到了垃圾对象，就需要对这些垃圾进行回收了。看看常用的垃圾回收算法之间的区别：</p>
+<h4 id="2-1标记-清除算法-Mark-Sweep"><a href="#2-1标记-清除算法-Mark-Sweep" class="headerlink" title="2.1标记-清除算法 (Mark-Sweep)"></a>2.1标记-清除算法 (Mark-Sweep)</h4><p>标记-清除算法将垃圾回收分为两个阶段：标记阶段和清除阶段。一种可行的实现是，在标记阶段首先通过根节点，标记所有从根节点开始的较大对象。因此，未被标记的对象就是未被引用的垃圾对象。然后，在清除阶段，清除所有未被标记的对象。<br><img src="/img/java/jvm/清除标记算法.png" alt="清除标记算法"><br>优点：</p>
+<ul>
+<li>实现简单<br>缺点：</li>
+<li>存在大量的空间碎片,无法分配大对象。</li>
+<li>标记和清除过程的效率都不高（对象不存在连续分配的内存空间中）。</li>
+</ul>
+<h4 id="2-2复制算法-Copying"><a href="#2-2复制算法-Copying" class="headerlink" title="2.2复制算法 (Copying)"></a>2.2复制算法 (Copying)</h4><p>将现有的内存空间分为两快，每次只使用其中一块，在垃圾回收时将正在使用的内存中的存活对象复制到未被使用的内存块中，之后，清除正在使用的内存块中的所有对象，交换两个内存的角色，完成垃圾回收。<br><img src="/img/java/jvm/复制算法.png" alt="复制算法"><br>优点：</p>
+<ul>
+<li>每次只对一块内存进行回收，运行高效。</li>
+<li>只需移动栈顶指针，按顺序分配内存即可，实现简单。</li>
+<li>内存回收时不用考虑内存碎片的出现。<br>缺点：</li>
+<li>可一次性分配的最大内存缩小了一半</li>
+</ul>
+<p>Java 的<b>新生代</b>串行垃圾回收器中使用了复制算法的思想<br><img src="/img/java/jvm/GC分代模型.png" alt="GC分代模型"><br> <b>堆大小</b> = <b>新生代</b> + <b>老年代</b>。其中，堆的大小可以通过参数 –Xms、-Xmx 来指定大小，–XX:NewRatio指定比例默认1:2，-XX:MaxTrnuringThreshold=15指定回收15次之后为老对象<br> <b>新生代</b> = <b>Eden</b> + (<b>From Survivor</b> + <b>To Survivor</b>);两块Survivor大小相同、地位相等，且可进行角色互换的空间块, –XX:SurvivorRatio修改比例 默认8:1:1。JVM 每次只会使用 Eden 和其中的一块 Survivor 区域来为对象服务，所以无论什么时候，总是有一块 Survivor 区域是空闲着的。因此，新生代实际可用的内存空间为 9/10 ( 即90% )的新生代空间。<br> <b>执行过程:</b> 当触发垃圾回收时，将Eden中的对象复制到空闲Survivor中(ex:To),如果是<b>大对象</b>直接进入老年代，<b>当空闲Survivor已满</b>也会直接进入<b>老年代</b>,使用中的Survivor(ex:From)也按改条件进入空闲Survivor</p>
+<h4 id="2-3标记-压缩-整理-算法-Mark-Compact"><a href="#2-3标记-压缩-整理-算法-Mark-Compact" class="headerlink" title="2.3标记-压缩(整理)算法 (Mark-Compact)"></a>2.3标记-压缩(整理)算法 (Mark-Compact)</h4><p> jvm新生代使用了复制算法，但是到了老年代由于对象存活率较高，复制效率相对变低。所以老年代一般采用标记-压缩(也叫整理)的算法：它是在标记-清除算法的基础上做了一些优化。也首先需要从根节点开始对所有可达对象做一次标记，但之后，它并不简单地清理未标记的对象，而是将所有的存活对象压缩到内存的一端。之后，清理边界外所有的空间。<br> <img src="/img/java/jvm/标记整理算法.png" alt="标记-整理"><br>优点：</p>
+<ul>
+<li>避免内存碎片导致无法分配大空间</li>
+</ul>
+<h4 id="2-4增量算法-Incremental-Collecting"><a href="#2-4增量算法-Incremental-Collecting" class="headerlink" title="2.4增量算法 (Incremental Collecting)"></a>2.4增量算法 (Incremental Collecting)</h4><p>增量算法的基本思想是，如果一次性将所有的垃圾进行处理，需要造成系统长时间的停顿，那么就可以让垃圾收集线程和应用程序线程交替执行。<b>每次</b>，垃圾收集线程<b>只收集一小片区域</b>的内存空间，接着切换到应用程序线程。依次反复，<b>直到垃圾收集完成</b>。使用这种方式，由于在垃圾回收过程中，间断性地还执行了应用程序代码，所以能减少系统的停顿时间。但是，因为线程切换和上下文转换的消耗，会使得垃圾回收的总体成本上升，造成系统吞吐量的下降。</p>
+<h4 id="2-5分代-Generational-Collecting"><a href="#2-5分代-Generational-Collecting" class="headerlink" title="2.5分代 (Generational Collecting)"></a>2.5分代 (Generational Collecting)</h4><p>根据对象所在不同的阶段进行不同的回收算法。在<b>新生代</b>中，每次垃圾收集时都会发现有大量对象死去，只有少量存活，因此可选用<b>复制算法</b>来完成收集，而<b>老年代</b>中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用标记—清除算法或<b>标记—整理</b>算法来进行回收。</p>
+<h3 id="3-垃圾收集器"><a href="#3-垃圾收集器" class="headerlink" title="3.垃圾收集器"></a>3.垃圾收集器</h3><p>垃圾收集器是内存回收算法的具体实现，Java虚拟机规范中对垃圾收集器应该如何实现并没有任何规定，因此不同厂商、不同版本的虚拟机所提供的垃圾收集器都可能会有很大的差别。</p>
+<h4 id="3-1-串行收集器"><a href="#3-1-串行收集器" class="headerlink" title="3.1 串行收集器"></a>3.1 串行收集器</h4><p><b>Serial收集器：</b>用于新生代，单线程并Stop The World，一般用于单CPU的应用，可以保证较高的吞吐率<br><b>Serial Old收集器：</b><br>通过指定-XX:+UseSerialGC参数，使用Serial + Serial Old的串行收集器组合进行内存回收。</p>
+<h4 id="3-2-并行收集器"><a href="#3-2-并行收集器" class="headerlink" title="3.2 并行收集器"></a>3.2 并行收集器</h4><p><b>ParNew收集器：</b>Serial收集器新生代的多线程实现，注意在进行垃圾回收的时候依然会stop the world，相比较Serial收集器而言它会运行多条进程进行垃圾回收。<br><b>Parallel Scavenge收集器：</b>采用复制算法的多线程新生代垃圾回收器，它所关注的目标是吞吐量。吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量=运行用户代码时间 / (运行用户代码时间 + 垃圾收集时间)。停顿时间越短就越适合需要与用户交互的程序，良好的响应速度能够提升用户的体验；而高吞吐量则可以最高效率地利用CPU时间，尽快地完成程序的运算任务，主要适合在后台运算而<b>不需要太多交互</b>的任务。<br><b>Parallel Old收集器：</b>Parallel Scavenge收集器的老年代版本，采用多线程和”标记－整理”算法。</p>
+<h4 id="3-3-并发收集器"><a href="#3-3-并发收集器" class="headerlink" title="3.3 并发收集器"></a>3.3 并发收集器</h4><p><b>CMS(Concurrent Mark Swep)收集器：</b><br>CMS收集器一种获取最短回收停顿时间为目标的收集器，使用最广泛。它的收集过程分为四个步骤：</p>
+<ol>
+<li>初始标记(initial mark)</li>
+<li>并发标记(concurrent mark)</li>
+<li>重新标记(remark)</li>
+<li>并发清除(concurrent sweep)<br><img src="/img/java/jvm/CMS回收图.png" alt="CMS垃圾回收图"><br>初始标记和重新标记还是会stop the world，但是在耗费时间更长的并发标记和并发清除两个阶段都可以和用户进程同时工作。不过由于CMS收集器是基于<b>标记清除</b>算法实现的，会导致有大量的空间碎片产生，在为大对象分配内存的时候，往往会出现老年代还有很大的空间剩余，但是无法找到足够大的连续空间来分配当前对象，不得不提前开启一次Full GC。为了解决这个问题，CMS收集器默认提供了一个-XX:+UseCMSCompactAtFullCollection收集开关参数（默认就是开启的)，用于在CMS收集器进行FullGC完开启内存碎片的合并整理过程，内存整理的过程是无法并发的，这样内存碎片问题倒是没有了，不过停顿时间不得不变长。虚拟机设计者还提供了另外一个参数-XX:CMSFullGCsBeforeCompaction参数用于设置执行多少次不压缩的FULL GC后跟着来一次带压缩的（默认值为0，表示每次进入Full GC时都进行碎片整理）。<br>主要优点：并发收集、低停顿。<br>缺点:</li>
+</ol>
+<ul>
+<li>对CPU资源非常敏感。在并发阶段，它虽然不会导致用户线程停顿，但是会因为占用了一部分线程而导致应用程序变慢，总吞吐量会降低。</li>
+<li>无法处理浮动垃圾，可能会出现“Concurrent Mode Failure（并发模式故障）”失败而导致Full GC产生。<br>浮动垃圾：由于CMS并发清理阶段用户线程还在运行着，伴随着程序运行自然就会有新的垃圾不断产生，这部分垃圾出现的标记过程之后，CMS无法在当次收集中处理掉它们，只好留待下一次GC中再清理。</li>
+<li>CMS是一款“标记–清除”算法实现的收集器，容易出现大量空间碎片。当空间碎片过多，将会给大对象分配带来很大的麻烦，往往会出现老年代还有很大空间剩余，但是无法找到足够大的连续空间来分配当前对象，不得不提前触发一次Full GC。</li>
+</ul>
+<p><b>G1收集器：</b><br><br>G1收集器是一款面向服务端应用的垃圾收集器。HotSpot团队赋予它的使命是在未来替换掉JDK1.5中发布的CMS收集器。与其他GC收集器相比，G1具备如下特点：</p>
+<ol>
+<li><b>并行于并发：</b>G1能充分利用CPU、多核环境下的硬件优势，使用多个CPU（CPU或者CPU核心）来缩短stop-The-World停顿时间。部分其他收集器原本需要停顿Java线程执行的GC动作，G1收集器仍然可以通过并发的方式让java程序继续执行。<br></li>
+<li><b>分代收集：</b>虽然G1可以不需要其他收集器配合就能独立管理整个GC堆，但是还是保留了分代的概念。它能够采用不同的方式去处理新创建的对象和已经存活了一段时间，熬过多次GC的旧对象以获取更好的收集效果。</li>
+<li><b>空间整合：</b>与CMS的“标记–清理”算法不同，G1从整体来看是基于“标记整理”算法实现的收集器；从局部上来看是基于“复制”算法实现的。</li>
+<li><b>可预测的停顿：</b>这是G1相对于CMS的另一个大优势，降低停顿时间是G1和ＣＭＳ共同的关注点，但Ｇ１除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为M毫秒的时间片段内</li>
+</ol>
+<p>G1运作步骤：</p>
+<ol>
+<li>初始标记</li>
+<li>并发标记</li>
+<li>最终标记</li>
+<li>筛选回收<br><img src="/img/java/jvm/G1回收图.png" alt="G1垃圾回收图"></li>
+</ol>
+<h3 id="4-垃圾收集器组合参数"><a href="#4-垃圾收集器组合参数" class="headerlink" title="4.垃圾收集器组合参数"></a>4.垃圾收集器组合参数</h3><p><img src="/img/java/jvm/垃圾收集器配置参数.png" alt="垃圾收集器配置参数"></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/pay/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -197,16 +289,77 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/垃圾回收机制/">展开全文 >></a>
-        </p>
+      
+        <span id="busuanzi_container_page_pv">|阅读量(<span id="busuanzi_value_page_pv"></span>)</span>
       
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.fengymi.cn/垃圾回收机制/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/yilia集成不蒜子浏览量统计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">yilia集成不蒜子浏览量统计</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -221,582 +374,48 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-yilia集成不蒜子浏览量统计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/yilia集成不蒜子浏览量统计/">yilia集成不蒜子浏览量统计</a>
-    </h1>
-  
-
-        
-        <a href="/yilia集成不蒜子浏览量统计/" class="archive-article-date">
-  	<time datetime="2018-02-13T04:52:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对于静态blog集成不蒜子非常方便<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener">官方</a></p>
-<h3 id="1-在相应的全局文件-例：footer-ejs-引入js文件"><a href="#1-在相应的全局文件-例：footer-ejs-引入js文件" class="headerlink" title="1.在相应的全局文件(例：footer.ejs)引入js文件"></a>1.在相应的全局文件(例：footer.ejs)引入js文件</h3><p>   （如果是yilia主题放在script.ejs中的main.xxx.js之前，避免全部tag查询界面样式错乱）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script <span class="keyword">async</span> src=<span class="string">"//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/yilia集成不蒜子浏览量统计/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/yilia集成不蒜子浏览量统计/">展开全文 >></a>
-        </p>
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-垃圾对象判定算法"><span class="toc-number">1.</span> <span class="toc-text">1.垃圾对象判定算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1引用计数算法"><span class="toc-number">1.1.</span> <span class="toc-text">1.1引用计数算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2根搜索法-GC-Roots-Tracing"><span class="toc-number">1.2.</span> <span class="toc-text">1.2根搜索法(GC Roots Tracing)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-垃圾收集算法"><span class="toc-number">2.</span> <span class="toc-text">2.垃圾收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1标记-清除算法-Mark-Sweep"><span class="toc-number">2.1.</span> <span class="toc-text">2.1标记-清除算法 (Mark-Sweep)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2复制算法-Copying"><span class="toc-number">2.2.</span> <span class="toc-text">2.2复制算法 (Copying)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3标记-压缩-整理-算法-Mark-Compact"><span class="toc-number">2.3.</span> <span class="toc-text">2.3标记-压缩(整理)算法 (Mark-Compact)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4增量算法-Incremental-Collecting"><span class="toc-number">2.4.</span> <span class="toc-text">2.4增量算法 (Incremental Collecting)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5分代-Generational-Collecting"><span class="toc-number">2.5.</span> <span class="toc-text">2.5分代 (Generational Collecting)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-垃圾收集器"><span class="toc-number">3.</span> <span class="toc-text">3.垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-串行收集器"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 串行收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-并行收集器"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 并行收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-并发收集器"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 并发收集器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-垃圾收集器组合参数"><span class="toc-number">4.</span> <span class="toc-text">4.垃圾收集器组合参数</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-shell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/shell/">shell加密解密</a>
-    </h1>
   
 
-        
-        <a href="/shell/" class="archive-article-date">
-  	<time datetime="2016-10-13T08:32:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3>shell脚本进行加密和解密操作</h3>
-
-<ul>
-<li><h4>使用gzexe</h4>
-
-</li>
-</ul>
-<p>使用gzexe进行shell加密或者说压缩<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzexe shell.sh <span class="comment">#这时就会产生一个shell.sh（压缩文件）和shell.sh~（源文件）</span></span><br></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/shell/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">加密</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">解密</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/shell/">展开全文 >></a>
-        </p>
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-maven-build" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/maven-build/">idea构建maven速度很慢</a>
-    </h1>
   
 
-        
-        <a href="/maven-build/" class="archive-article-date">
-  	<time datetime="2016-10-08T06:41:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>加载archetype-catalog.xml文件很慢导致<br>使用本地archetype-catalog.xml文件即可解决该问题</p>
-<p>官网下载： <a href="http://repo1.maven.org/maven2/archetype-catalog.xml" target="_blank" rel="noopener">archetype-catalog.xml</a><br>百度云下载： <a href="https://pan.baidu.com/s/1eSE4KH8" target="_blank" rel="noopener">archetype-catalog.xml</a></p>
-        
-          <a class="article-more-a" href="/maven-build/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">maven</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">build</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/maven-build/">展开全文 >></a>
-        </p>
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-idea-artifact" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/idea-artifact/">idea导入项目，配置artifact问题</a>
-    </h1>
   
 
-        
-        <a href="/idea-artifact/" class="archive-article-date">
-  	<time datetime="2016-10-08T06:18:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>配置module ，标识项目为什么类型（web）</li>
-<li>添加artifact,指定web-inf/lib，web-info/classes中的文件</li>
-</ol>
-<p>详细操作 <a href="http://blog.zhangjikai.com/2015/12/26/%E3%80%90%E8%BD%AF%E4%BB%B6%E3%80%91Intellij-IDEA-14-%E5%AF%BC%E5%85%A5maven-web%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0Tomcat/" target="_blank" rel="noopener">zhangjikai的blog</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">idea</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">artifact</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/idea-artifact/">展开全文 >></a>
-        </p>
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-随意" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/随意/">随意</a>
-    </h1>
   
 
-        
-        <a href="/随意/" class="archive-article-date">
-  	<time datetime="2016-10-07T09:00:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="真的随意"><a href="#真的随意" class="headerlink" title="真的随意"></a>真的随意</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/随意/">展开全文 >></a>
-        </p>
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-git_study" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/git_study/">git使用教程</a>
-    </h1>
-  
-
-        
-        <a href="/git_study/" class="archive-article-date">
-  	<time datetime="2016-10-07T02:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://git-scm.com/doc" target="_blank" rel="noopener">官方文档</a></p>
-<h3 id="1-快速使用"><a href="#1-快速使用" class="headerlink" title="1. 快速使用"></a>1. 快速使用</h3><p>初始化本地仓库目录（获取远程仓库代码）,修改、提交,并推送到远程仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初始化</span></span><br><span class="line">git init <span class="comment">#初始化本地目录</span></span><br><span class="line"><span class="comment">#克隆远程代码</span></span><br><span class="line">git <span class="built_in">clone</span> xxxx.git <span class="comment"># 克隆并使用远程项目名称</span></span><br><span class="line">git <span class="built_in">clone</span> xxxx.git study <span class="comment"># 克隆并新建本地名称</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改</span></span><br><span class="line">touch <span class="built_in">test</span> <span class="comment"># 新建文件</span></span><br><span class="line">git add <span class="built_in">test</span> <span class="comment"># 把某个文件加入到git管理</span></span><br><span class="line">git commit -m <span class="string">"test"</span> <span class="comment"># 提交到本地</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#推送至远程仓库</span></span><br><span class="line">git remote add origin xxxx.git <span class="comment"># 添加远程仓库地址 (如果是克隆远程的就不需要添加)</span></span><br><span class="line">git push origin master <span class="comment"># 提交到master分支</span></span><br></pre></td></tr></table></figure></p>
-<p><br></p>
-        
-          <a class="article-more-a" href="/git_study/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">版本控制</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/git_study/">展开全文 >></a>
-        </p>
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo-study" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/hexo-study/">hexo-study</a>
-    </h1>
-  
-
-        
-        <a href="/hexo-study/" class="archive-article-date">
-  	<time datetime="2016-10-01T03:37:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a></p>
-<p>基础工作需要安装node.js 和 git<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置npm全局安装目录及缓存目录</span></span><br><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">"%NODE_HOME%/node_global"</span></span><br><span class="line">npm config <span class="built_in">set</span> cache <span class="string">"%NODE_HOME%/node_cache"</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="1-hexo安装"><a href="#1-hexo安装" class="headerlink" title="1. hexo安装"></a>1. hexo安装</h3><p>安装一些其他的hexo功能(项目根目录执行)(使用npm install命令, 安装当前package.json下的依赖)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm install -g hexo-cli	<span class="comment">#安装hexo(全局安装)</span></span><br><span class="line">npm install hexo --save <span class="comment"># 保存到package.json文件(项目根目录)</span></span><br><span class="line">npm install hexo-server <span class="comment"># 安装hexo server(发布本地)的功能</span></span><br><span class="line">npm install hexo-deployer-git --save <span class="comment"># 安装hexo d (使用git提交的功能,需要支持ssh连接github)</span></span><br></pre></td></tr></table></figure></p>
-<p><br> </p>
-        
-          <a class="article-more-a" href="/hexo-study/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/hexo-study/">展开全文 >></a>
-        </p>
-      
-      
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://blog.fengymi.cn/垃圾回收机制/",
+  owner: 'fengymi',
+  repo: 'issues',
+  oauth: {
+    client_id: '6dd577db0aca59ab9124',
+    client_secret: 'a802dbbc85056f99b7586dd51b747d6f38ad2add',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
   
 
 
@@ -829,8 +448,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
