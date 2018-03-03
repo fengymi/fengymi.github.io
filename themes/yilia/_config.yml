@@ -2,7 +2,7 @@
 
 menu:
   主页: /
-  java: /tags/java/
+#  java: /tags/java/
 
 # SubNav
 subnav:
